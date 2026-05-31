@@ -1,0 +1,209 @@
+local CoreGui = game:GetService("CoreGui")
+local ToraScript = CoreGui:FindFirstChild("ToraScript")
+if ToraScript then
+    ToraScript:Destroy()
+end
+
+local success, r10 = pcall(function()
+    return loadstring(game:HttpGet("https://pastebin.com/raw/RFRgAqcW", true))()
+end)
+
+if not success or not r10 then
+    warn("Gagal memuat library")
+    return
+end
+
+local Window = r10:CreateWindow("Wall Hop Slap Meter")
+
+Window:AddButton({
+    flag = "button",
+    text = "Give Basic Crate",
+    callback = function()
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer then
+            MarketplaceService:SignalPromptProductPurchaseFinished(LocalPlayer.UserId, 3592984617, true)
+        end
+    end
+})
+
+Window:AddButton({
+    flag = "button",
+    text = "Give Rare Crate",
+    callback = function()
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer then
+            MarketplaceService:SignalPromptProductPurchaseFinished(LocalPlayer.UserId, 3592984807, true)
+        end
+    end
+})
+
+Window:AddButton({
+    flag = "button",
+    text = "Give Epic Crate",
+    callback = function()
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer then
+            MarketplaceService:SignalPromptProductPurchaseFinished(LocalPlayer.UserId, 3592984944, true)
+        end
+    end
+})
+
+Window:AddButton({
+    flag = "button",
+    text = "Give Legendary Crate",
+    callback = function()
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer then
+            MarketplaceService:SignalPromptProductPurchaseFinished(LocalPlayer.UserId, 3592985022, true)
+        end
+    end
+})
+
+Window:AddButton({
+    flag = "button",
+    text = "Give Exotic Crate",
+    callback = function()
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer then
+            MarketplaceService:SignalPromptProductPurchaseFinished(LocalPlayer.UserId, 3600340012, true)
+        end
+    end
+})
+
+Window:AddButton({
+    flag = "button",
+    text = "Jumpscare All",
+    callback = function()
+        local MarketplaceService = game:GetService("MarketplaceService")
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer then
+            MarketplaceService:SignalPromptProductPurchaseFinished(LocalPlayer.UserId, 3590297357, true)
+        end
+    end
+})
+
+Window:AddLabel({
+    text = "Made By: SYFTAAAAAA"
+})
+
+local Window2 = r10:CreateWindow("Obby")
+
+local infJumpConnection = nil
+
+Window2:AddButton({
+    flag = "button",
+    text = "Enable Inf Jump",
+    callback = function()
+        if infJumpConnection then
+            infJumpConnection:Disconnect()
+            infJumpConnection = nil
+        end
+        
+        local UserInputService = game:GetService("UserInputService")
+        local Players = game:GetService("Players")
+        
+        infJumpConnection = UserInputService.JumpRequest:Connect(function()
+            local LocalPlayer = Players.LocalPlayer
+            if LocalPlayer and LocalPlayer.Character then
+                local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if Humanoid and Humanoid.Health > 0 then
+                    Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                end
+            end
+        end)
+        
+        if r10.ShowNotification then
+            r10:ShowNotification("Inf Jump Enabled", "Inf Jump has been activated", 2)
+        end
+    end
+})
+
+Window2:AddButton({
+    flag = "button",
+    text = "Disable Inf Jump",
+    callback = function()
+        if infJumpConnection then
+            infJumpConnection:Disconnect()
+            infJumpConnection = nil
+            
+            if r10.ShowNotification then
+                r10:ShowNotification("Inf Jump Disabled", "Inf Jump has been deactivated", 2)
+            end
+        else
+            if r10.ShowNotification then
+                r10:ShowNotification("Info", "Inf Jump is not active", 2)
+            end
+        end
+    end
+})
+
+Window2:AddButton({
+    flag = "button",
+    text = "Toggle Inf Jump",
+    callback = function()
+        if infJumpConnection then
+            infJumpConnection:Disconnect()
+            infJumpConnection = nil
+            
+            if r10.ShowNotification then
+                r10:ShowNotification("Inf Jump Disabled", "Inf Jump has been deactivated", 2)
+            end
+        else
+            local UserInputService = game:GetService("UserInputService")
+            local Players = game:GetService("Players")
+            
+            infJumpConnection = UserInputService.JumpRequest:Connect(function()
+                local LocalPlayer = Players.LocalPlayer
+                if LocalPlayer and LocalPlayer.Character then
+                    local Humanoid = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                    if Humanoid and Humanoid.Health > 0 then
+                        Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                    end
+                end
+            end)
+            
+            if r10.ShowNotification then
+                r10:ShowNotification("Inf Jump Enabled", "Inf Jump has been activated", 2)
+            end
+        end
+    end
+})
+
+Window2:AddButton({
+    flag = "button",
+    text = "Goto StageEnd",
+    callback = function()
+        local Players = game:GetService("Players")
+        local LocalPlayer = Players.LocalPlayer
+        if LocalPlayer and LocalPlayer.Character then
+            local HumanoidRootPart = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if HumanoidRootPart then
+                local Stages = workspace:FindFirstChild("Stages")
+                if Stages then
+                    local lastStage = nil
+                    for _, descendant in ipairs(Stages:GetDescendants()) do
+                        if descendant:IsA("BasePart") and descendant.Name:match("Stage") then
+                            lastStage = descendant
+                        end
+                    end
+                    if lastStage then
+                        HumanoidRootPart.CFrame = lastStage.CFrame + Vector3.new(0, 3, 0)
+                    end
+                end
+            end
+        end
+    end
+})
+
+r10:Init()
